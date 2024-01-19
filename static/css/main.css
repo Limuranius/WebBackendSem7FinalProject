@@ -1,0 +1,79 @@
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.main-block {
+    width: 50%;
+    background-color: #282f3b;
+    margin: auto;
+}
+
+span.tag {
+    display: inline-block;
+    border-radius: 12px;
+    background-color: dodgerblue;
+    margin: 0 5px 3px 0;
+    padding: 0 12px;
+}
+
+.tournament-card {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #3c4757;
+}
+
+.stage-card {
+    background-color: #455266;
+    border-radius: 12px;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+
+.problem-card {
+    display: inline-block;
+    width: 30%;
+    background-color: #586c8a;
+    border-radius: 12px;
+    padding: 5px;
+    margin: 3px;
+}
+
+.tournament-name {
+    font-size: 24px;
+    color: orange;
+    display: inline-block;
+    width: 40%;
+}
+
+.tournament-time {
+    display: inline-block;
+    width: 55%;
+}
+
+.tournament-filters {
+    vertical-align: top;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #3c4757;
+    display: inline-block;
+    width: 20%;
+}
+
+.tournaments {
+    display: inline-block;
+    width: 70%;
+}
+
+.gray-box-1 {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #3c4757;
+}

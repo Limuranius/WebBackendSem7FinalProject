@@ -1,0 +1,28 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+    <title>Выберите задачу</title>
+</head>
+<body>
+
+<div class="main-block">
+    <form action="{{url_for('choose_problem')}}" method="get">
+        {% for tag in used_tags %}
+            <input type="hidden" name="used_tags" value={{tag.tag_id}}>
+        {% endfor %}
+        {{macros.tag_list(used_tags)}}
+        {{ macros.tag_select(unused_tags) }}
+        <input type="submit" name="add_tag" value="Добавить тег">
+    </form>
+
+    {% for problem in problems %}
+        {{ macros.problem_card_with_button(problem) }}
+    {% endfor %}
+</div>
+
+</body>
+</html>

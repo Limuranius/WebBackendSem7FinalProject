@@ -1,0 +1,74 @@
+{% macro tag_list(tags) %}
+    <div class="tags-container">
+        {% for tag in tags %}
+            <span class="tag">{{tag.name}}</span>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro problem_card(problem) %}
+    <div class="problem-card">
+        <div class="problem-name">{{problem.name}}</div>
+        {{tag_list(problem.tags)}}
+    </div>
+{% endmacro %}
+
+{% macro problem_card_with_button(problem) %}
+    <div class="problem-card">
+        <div class="problem-name">{{problem.name}}</div>
+        {{tag_list(problem.tags)}}
+        <p>Дата последнего использования: {{problem.last_used}}</p>
+        <p>Количество использований: {{problem.find_use_count()}}</p>
+        <form action="{{url_for('create_get')}}" method="get">
+            <input type="hidden" name="problem_id" value={{problem.problem_id}}>
+            <input type="submit" name="action" value="Добавить задачу">
+        </form>
+    </div>
+{% endmacro %}
+
+{% macro stage_card(stage) %}
+    <details class="stage-card">
+        <summary>{{stage.name}}</summary>
+        {% for problem in stage.problems %}
+            {{ problem_card(problem) }}
+        {% endfor %}
+    </details>
+{% endmacro %}
+
+{% macro stage_card_with_create(stage, stage_idx) %}
+    <details class="stage-card">
+        <summary>{{stage.name}}</summary>
+        {% for problem in stage.problems %}
+            {{ problem_card(problem) }}
+        {% endfor %}
+
+        <form action="{{url_for('choose_problem')}}" method="get">
+            <input type="hidden" name="stage_idx" value={{stage_idx}}>
+            <input type="submit" name="action" value="Добавить задачу">
+        </form>
+    </details>
+{% endmacro %}
+
+{% macro tournament_card(tournament) %}
+    <div class="tournament-card">
+        <div class="tournament-name">{{tournament.name}}</div>
+        <div class="tournament-time">
+            От: {{tournament.start_time}}
+            <br>
+            До: {{tournament.end_time}}
+        </div>
+        {{ tag_list(tournament.get_tags()) }}
+        <p>{{tournament.description}}</p>
+        {% for stage in tournament.stages %}
+            {{ stage_card(stage) }}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro tag_select (tags) %}
+    <select name="tag">
+        {% for tag in tags %}
+            <option value={{tag.tag_id}}>{{tag.name}}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}

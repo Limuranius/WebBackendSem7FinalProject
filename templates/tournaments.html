@@ -1,0 +1,49 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+    <title>Турниры</title>
+</head>
+<body>
+
+    <div class="main-block">
+        <h1>Турниры</h1>
+        <form action="{{url_for('create_get')}}" method="get">
+            <input type="submit" value="Создать турнир">
+        </form>
+        <div class="tournament-filters">
+            <form action="{{url_for('tournaments')}}" method="get">
+                <p>
+                    Теги
+                    <br>
+                    {% for tag in used_tags %}
+                        <input type="hidden" name="used_tags" value={{tag.tag_id}}>
+                    {% endfor %}
+                    {{macros.tag_list(used_tags)}}
+                    {{macros.tag_select(unused_tags)}}
+                    <input type="submit" name="add_tag" value="Добавить тег">
+                </p>
+                <p>
+                    Дата
+                    <br>
+                    от:
+                    <input type="date" name="start_time">
+                    <br>
+                    до:
+                    <input type="date" name="end_time">
+                </p>
+                <input type="submit" name="search" value="Найти">
+            </form>
+        </div>
+        <div class="tournaments">
+            {% for tournament in tournaments %}
+                {{macros.tournament_card(tournament)}}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

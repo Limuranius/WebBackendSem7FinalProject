@@ -1,0 +1,47 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+    <title>Создать турнир</title>
+</head>
+<body>
+<div class="main-block">
+
+    <div class="gray-box-1">
+        {% for stage in stages %}
+            {{ macros.stage_card_with_create(stage, loop.index0) }}
+        {% endfor %}
+
+        <form action="{{url_for('create_get')}}" method="get">
+            <input type="text" name="stage_name" placeholder="Название этапа">
+            <input type="submit" name="action" value="Добавить этап">
+        </form>
+    </div>
+
+    <div class="gray-box-1">
+        <form action="{{url_for('create_post')}}" method="post">
+            <p>
+                Название турнира<br>
+                <input type="text" name="tournament_name">
+            </p>
+            <p>
+                Описание<br>
+                <input type="text" name="description">
+            </p>
+            <p>
+                Дата начала<br>
+                <input type="date" name="start_time" required>
+            </p>
+            <p>
+                Дата окончания<br>
+                <input type="date" name="end_time" required>
+            </p>
+            <input type="submit" name="action" value="Создать турнир">
+        </form>
+    </div>
+</div>
+</body>
+</html>
